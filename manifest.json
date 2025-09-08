@@ -1,0 +1,57 @@
+{
+	"manifest_version": 3,
+	"author":"spiderWei",
+    "name": "SpiderAuto - 全功能版",
+	"version": "2.0",
+	"description": "全功能数据抓取插件：同时支持基础数据抓取和高级功能（用户管理+数据监控+导出）",
+	
+	"icons":
+	{
+		"16": "img/cookie-16-filled.png",
+		"48": "img/cookie-48-filled.png",
+		"128": "img/cookie-128-filled.png"
+
+	},
+	"action":
+	{
+		"default_icon": "img/cookie-128-filled.png",
+		"default_popup": "popup.html"
+	},
+
+	"permissions":
+	[
+		"declarativeContent",
+		"cookies",
+		"tabs",
+		"notifications",
+		"webRequest",
+    	"<all_urls>",
+		"declarativeNetRequest",
+		"activeTab", 
+		"scripting",
+		"downloads",
+        "downloads.open",
+        "storage",
+        "alarms"
+	],
+	"host_permissions": ["http://*/*", "https://*/*" ],
+	"background":
+	{
+		"service_worker": "js/background.js",
+		"type": "module"
+	},
+  	"web_accessible_resources": [{
+	  "resources": ["js/spiderWei.js"],
+	  "matches": [ "*://*/*"]
+	}],
+  	
+
+	"content_scripts": 
+	[
+		{
+			"matches": ["*://*/*"],
+			"js": [  "js/jquery-2.1.4.js",  "js/inject.js" , "js/content_script.js" ],
+			"run_at": "document_start"
+		}
+	]
+}
